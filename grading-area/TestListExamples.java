@@ -24,6 +24,7 @@ public class TestListExamples {
     List<String> tester = Arrays.asList("moon", "stars", "moon");
     List<String> expected = Arrays.asList("moon", "moon");
     IsMoon sc = new IsMoon();
-    assertArrayEquals(expected, ListExamples.filter(tester, sc));
+    List<String> actual = ListExamples.filter(tester, sc);
+    assertEquals(expected, actual);
   }
 }

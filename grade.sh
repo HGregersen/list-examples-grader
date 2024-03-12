@@ -40,15 +40,17 @@ lastline=$(cat junit-output.txt | tail -n 2 | head -n 1)
 echo $lastline
 if [[ $lastline = *'OK'* ]]
 then
+    tests=$(echo $lastline | awk -F'[()]' '{print $2}' | awk -F ' ' '{print $1}')
+    successes=$(echo $tests)
     echo "YIPPPEEEEEEEEEEEEE YOU PASSED"
-    echo "Your score is 1 / 1"
+    
 else
     tests=$(echo $lastline | awk -F', ' '{print $1}' | awk -F ': ' '{print $2}')
     echo $tests
     failures=$(echo $lastline | awk -F',' '{print $2}' | awk -F': ' '{print $2}')
     echo $failures
     successes=$((tests - failures))
-
-    echo "Your score is $successes / $tests"
 fi
+
+echo "Your score is $successes / $tests"
 
